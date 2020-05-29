@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "LoggedIn_S";
+}
+
+@if (Session["nombre_usuario"] != null)
+{
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles.css">
+
+    <div class="background" style="background-image: url('../../Content/Images/one-punch-man.jpg');">
+        <div class="container">
+            <div class="mini_container">
+
+                <form class="form">
+                    <h2>
+                        Bienvenido @Session["nombre_usuario"].ToString()
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                    </h2>
+
+                    <div class="image">
+                        <a href="../Juego_Favorito/List" class="button">
+                            Juegos favoritos
+                            <img src="~/Content/Images/control.png" width="60px" height="50px" alt="IMG">
+                        </a>
+                    </div>
+
+                    <div class="image">
+                        <a href="../Comidas/List" class="button">
+                            Comidas del mes
+                            <img src="~/Content/Images/comida.png" width="60px" height="50px" alt="IMG">
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

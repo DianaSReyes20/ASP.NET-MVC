@@ -1,0 +1,56 @@
+﻿@model PAvanzada.Models.Comidas
+
+@{
+    ViewBag.Title = "Comidas";
+}
+@using (Html.BeginForm("Comidas", "Comidas", FormMethod.Post))
+{
+    <div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+        <div class="container">
+            <div class="mini_container">
+                <div class="image" data-tilt>
+                    <img src="../../Content/Images/comida.jpg" alt="IMG">
+                </div>
+
+                <form class="form">
+                    <span class="form_title">
+                        Registrar comida
+                    </span>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "input100", @placeholder = "Fecha" } })
+                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.tipo_comida, new { htmlAttributes = new { @class = "input100", @placeholder = "Tipo de comida" })
+                        @Html.ValidationMessageFor(model => model.tipo_comida, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "input100", @placeholder = "Descripción" } })
+                        @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="image">
+                        <button class="button">
+                            Registrar
+                        </button>
+                    </div>
+
+                </form>
+                <a href="../Comidas/List" class="atras">
+                    Regresar a la lista
+                    <img src="~/Content/Images/atras.png" width="20px" height="20px" alt="IMG">
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

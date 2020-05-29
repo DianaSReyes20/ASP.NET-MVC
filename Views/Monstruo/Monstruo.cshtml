@@ -1,0 +1,62 @@
+﻿@model PAvanzada.Models.Monstruo
+
+@{
+    ViewBag.Title = "Monstruo";
+}
+
+
+@using (Html.BeginForm("Monstruo", "Monstruo", FormMethod.Post))
+{
+    <div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+        <div class="container">
+            <div class="mini_container">
+                <div class="image" data-tilt>
+                    <img src="../../Content/Images/Monstruos.jpg" alt="IMG">
+                </div>
+
+                <form class="form">
+                    <span class="form_title">
+                        Registrar monstruo
+                    </span>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_monstruo, new { htmlAttributes = new { @class = "input100", @placeholder = "Nivel amenaza" } })
+                        @Html.ValidationMessageFor(model => model.nombre_monstruo, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nivel_amenaza, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre monstruo" } })
+                        @Html.ValidationMessageFor(model => model.nivel_amenaza, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.tipo, new { htmlAttributes = new { @class = "input100", @placeholder = "Tipo monstruo" } })
+                        @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="image">
+                        <button class="button">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+                <a href="../Usuario/LoggedIn" class="atras">
+                    Regresar al menú
+                    <img src="~/Content/Images/atras.png" width="20px" height="20px" alt="IMG">
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

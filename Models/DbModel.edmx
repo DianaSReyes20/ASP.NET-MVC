@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="asociacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comidas">
+          <Key>
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="tipo_comida" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Convenio">
+          <Key>
+            <PropertyRef Name="codigo_c" />
+          </Key>
+          <Property Name="codigo_c" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre_patr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nombre_heroe" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Heroe">
+          <Key>
+            <PropertyRef Name="nombre_heroe" />
+          </Key>
+          <Property Name="nombre_heroe" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="rango" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="habilidad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="celulas" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Juego_Favorito">
+          <Key>
+            <PropertyRef Name="codigo_juego" />
+          </Key>
+          <Property Name="codigo_juego" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre_juego" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estrellas" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lucha">
+          <Key>
+            <PropertyRef Name="codigo_l" />
+          </Key>
+          <Property Name="codigo_l" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre_monstruo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nombre_heroe" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="resultado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre_ganador" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Monstruo">
+          <Key>
+            <PropertyRef Name="nombre_monstruo" />
+          </Key>
+          <Property Name="nombre_monstruo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nivel_amenaza" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patrocinador">
+          <Key>
+            <PropertyRef Name="nombre_patr" />
+          </Key>
+          <Property Name="nombre_patr" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="nombre_usuario" />
+          </Key>
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Convenio__nombre__2C3393D0">
+          <End Role="Patrocinador" Type="Self.Patrocinador" Multiplicity="1" />
+          <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patrocinador">
+              <PropertyRef Name="nombre_patr" />
+            </Principal>
+            <Dependent Role="Convenio">
+              <PropertyRef Name="nombre_patr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Convenio__nombre__2D27B809">
+          <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+          <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heroe">
+              <PropertyRef Name="nombre_heroe" />
+            </Principal>
+            <Dependent Role="Convenio">
+              <PropertyRef Name="nombre_heroe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lucha__nombre_he__30F848ED">
+          <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+          <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heroe">
+              <PropertyRef Name="nombre_heroe" />
+            </Principal>
+            <Dependent Role="Lucha">
+              <PropertyRef Name="nombre_heroe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lucha__nombre_mo__300424B4">
+          <End Role="Monstruo" Type="Self.Monstruo" Multiplicity="1" />
+          <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monstruo">
+              <PropertyRef Name="nombre_monstruo" />
+            </Principal>
+            <Dependent Role="Lucha">
+              <PropertyRef Name="nombre_monstruo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="asociacionModelStoreContainer">
+          <EntitySet Name="Comidas" EntityType="Self.Comidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Convenio" EntityType="Self.Convenio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Heroe" EntityType="Self.Heroe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Juego_Favorito" EntityType="Self.Juego_Favorito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lucha" EntityType="Self.Lucha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monstruo" EntityType="Self.Monstruo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patrocinador" EntityType="Self.Patrocinador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Convenio__nombre__2C3393D0" Association="Self.FK__Convenio__nombre__2C3393D0">
+            <End Role="Patrocinador" EntitySet="Patrocinador" />
+            <End Role="Convenio" EntitySet="Convenio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Convenio__nombre__2D27B809" Association="Self.FK__Convenio__nombre__2D27B809">
+            <End Role="Heroe" EntitySet="Heroe" />
+            <End Role="Convenio" EntitySet="Convenio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lucha__nombre_he__30F848ED" Association="Self.FK__Lucha__nombre_he__30F848ED">
+            <End Role="Heroe" EntitySet="Heroe" />
+            <End Role="Lucha" EntitySet="Lucha" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lucha__nombre_mo__300424B4" Association="Self.FK__Lucha__nombre_mo__300424B4">
+            <End Role="Monstruo" EntitySet="Monstruo" />
+            <End Role="Lucha" EntitySet="Lucha" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="asociacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comidas">
+          <Key>
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tipo_comida" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Convenio">
+          <Key>
+            <PropertyRef Name="codigo_c" />
+          </Key>
+          <Property Name="codigo_c" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_patr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Patrocinador" Relationship="Self.FK__Convenio__nombre__2C3393D0" FromRole="Convenio" ToRole="Patrocinador" />
+          <NavigationProperty Name="Heroe" Relationship="Self.FK__Convenio__nombre__2D27B809" FromRole="Convenio" ToRole="Heroe" />
+        </EntityType>
+        <EntityType Name="Heroe">
+          <Key>
+            <PropertyRef Name="nombre_heroe" />
+          </Key>
+          <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rango" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="habilidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="celulas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Convenio" Relationship="Self.FK__Convenio__nombre__2D27B809" FromRole="Heroe" ToRole="Convenio" />
+          <NavigationProperty Name="Lucha" Relationship="Self.FK__Lucha__nombre_he__30F848ED" FromRole="Heroe" ToRole="Lucha" />
+        </EntityType>
+        <EntityType Name="Juego_Favorito">
+          <Key>
+            <PropertyRef Name="codigo_juego" />
+          </Key>
+          <Property Name="codigo_juego" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_juego" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estrellas" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lucha">
+          <Key>
+            <PropertyRef Name="codigo_l" />
+          </Key>
+          <Property Name="codigo_l" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_monstruo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resultado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_ganador" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Heroe" Relationship="Self.FK__Lucha__nombre_he__30F848ED" FromRole="Lucha" ToRole="Heroe" />
+          <NavigationProperty Name="Monstruo" Relationship="Self.FK__Lucha__nombre_mo__300424B4" FromRole="Lucha" ToRole="Monstruo" />
+        </EntityType>
+        <EntityType Name="Monstruo">
+          <Key>
+            <PropertyRef Name="nombre_monstruo" />
+          </Key>
+          <Property Name="nombre_monstruo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nivel_amenaza" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Lucha" Relationship="Self.FK__Lucha__nombre_mo__300424B4" FromRole="Monstruo" ToRole="Lucha" />
+        </EntityType>
+        <EntityType Name="Patrocinador">
+          <Key>
+            <PropertyRef Name="nombre_patr" />
+          </Key>
+          <Property Name="nombre_patr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Convenio" Relationship="Self.FK__Convenio__nombre__2C3393D0" FromRole="Patrocinador" ToRole="Convenio" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="nombre_usuario" />
+          </Key>
+          <Property Name="nombre_usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Convenio__nombre__2C3393D0">
+          <End Role="Patrocinador" Type="Self.Patrocinador" Multiplicity="1" />
+          <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patrocinador">
+              <PropertyRef Name="nombre_patr" />
+            </Principal>
+            <Dependent Role="Convenio">
+              <PropertyRef Name="nombre_patr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Convenio__nombre__2D27B809">
+          <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+          <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heroe">
+              <PropertyRef Name="nombre_heroe" />
+            </Principal>
+            <Dependent Role="Convenio">
+              <PropertyRef Name="nombre_heroe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lucha__nombre_he__30F848ED">
+          <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+          <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Heroe">
+              <PropertyRef Name="nombre_heroe" />
+            </Principal>
+            <Dependent Role="Lucha">
+              <PropertyRef Name="nombre_heroe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lucha__nombre_mo__300424B4">
+          <End Role="Monstruo" Type="Self.Monstruo" Multiplicity="1" />
+          <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monstruo">
+              <PropertyRef Name="nombre_monstruo" />
+            </Principal>
+            <Dependent Role="Lucha">
+              <PropertyRef Name="nombre_monstruo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comidas" EntityType="Self.Comidas" />
+          <EntitySet Name="Convenio" EntityType="Self.Convenio" />
+          <EntitySet Name="Heroe" EntityType="Self.Heroe" />
+          <EntitySet Name="Juego_Favorito" EntityType="Self.Juego_Favorito" />
+          <EntitySet Name="Lucha" EntityType="Self.Lucha" />
+          <EntitySet Name="Monstruo" EntityType="Self.Monstruo" />
+          <EntitySet Name="Patrocinador" EntityType="Self.Patrocinador" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Convenio__nombre__2C3393D0" Association="Self.FK__Convenio__nombre__2C3393D0">
+            <End Role="Patrocinador" EntitySet="Patrocinador" />
+            <End Role="Convenio" EntitySet="Convenio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Convenio__nombre__2D27B809" Association="Self.FK__Convenio__nombre__2D27B809">
+            <End Role="Heroe" EntitySet="Heroe" />
+            <End Role="Convenio" EntitySet="Convenio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lucha__nombre_he__30F848ED" Association="Self.FK__Lucha__nombre_he__30F848ED">
+            <End Role="Heroe" EntitySet="Heroe" />
+            <End Role="Lucha" EntitySet="Lucha" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lucha__nombre_mo__300424B4" Association="Self.FK__Lucha__nombre_mo__300424B4">
+            <End Role="Monstruo" EntitySet="Monstruo" />
+            <End Role="Lucha" EntitySet="Lucha" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="asociacionModelStoreContainer" CdmEntityContainer="DbModels">
+          <EntitySetMapping Name="Comidas">
+            <EntityTypeMapping TypeName="asociacionModel.Comidas">
+              <MappingFragment StoreEntitySet="Comidas">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="tipo_comida" ColumnName="tipo_comida" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Convenio">
+            <EntityTypeMapping TypeName="asociacionModel.Convenio">
+              <MappingFragment StoreEntitySet="Convenio">
+                <ScalarProperty Name="codigo_c" ColumnName="codigo_c" />
+                <ScalarProperty Name="nombre_patr" ColumnName="nombre_patr" />
+                <ScalarProperty Name="nombre_heroe" ColumnName="nombre_heroe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Heroe">
+            <EntityTypeMapping TypeName="asociacionModel.Heroe">
+              <MappingFragment StoreEntitySet="Heroe">
+                <ScalarProperty Name="nombre_heroe" ColumnName="nombre_heroe" />
+                <ScalarProperty Name="rango" ColumnName="rango" />
+                <ScalarProperty Name="habilidad" ColumnName="habilidad" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="celulas" ColumnName="celulas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Juego_Favorito">
+            <EntityTypeMapping TypeName="asociacionModel.Juego_Favorito">
+              <MappingFragment StoreEntitySet="Juego_Favorito">
+                <ScalarProperty Name="codigo_juego" ColumnName="codigo_juego" />
+                <ScalarProperty Name="nombre_juego" ColumnName="nombre_juego" />
+                <ScalarProperty Name="estrellas" ColumnName="estrellas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lucha">
+            <EntityTypeMapping TypeName="asociacionModel.Lucha">
+              <MappingFragment StoreEntitySet="Lucha">
+                <ScalarProperty Name="codigo_l" ColumnName="codigo_l" />
+                <ScalarProperty Name="nombre_monstruo" ColumnName="nombre_monstruo" />
+                <ScalarProperty Name="nombre_heroe" ColumnName="nombre_heroe" />
+                <ScalarProperty Name="resultado" ColumnName="resultado" />
+                <ScalarProperty Name="nombre_ganador" ColumnName="nombre_ganador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monstruo">
+            <EntityTypeMapping TypeName="asociacionModel.Monstruo">
+              <MappingFragment StoreEntitySet="Monstruo">
+                <ScalarProperty Name="nombre_monstruo" ColumnName="nombre_monstruo" />
+                <ScalarProperty Name="nivel_amenaza" ColumnName="nivel_amenaza" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patrocinador">
+            <EntityTypeMapping TypeName="asociacionModel.Patrocinador">
+              <MappingFragment StoreEntitySet="Patrocinador">
+                <ScalarProperty Name="nombre_patr" ColumnName="nombre_patr" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="asociacionModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PAvanzada.Models.Juego_Favorito>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+    <div class="container">
+        <div class="mini_container">
+
+            <form class="form">
+                <span class="form_title">
+                    Lista de juegos
+                </span>
+
+                <p>
+                    @Html.ActionLink("Registrar nuevo juego", "Juego_Favorito")
+                </p>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            <label>Codigo juego</label>
+                        </th>
+                        <th>
+                            <label>Nombre </label>
+                        </th>
+                        <th>
+                            <label> No. Estrellas</label>
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.codigo_juego)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_juego)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.estrellas)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Editar", new { codigo_juego=item.codigo_juego  }) |
+                                @Html.ActionLink("Jugar", "Jugar", "https://plarium.com/en/strategy-games/sparta-war-of-empires/") |
+                                @Html.ActionLink("Eliminar", "Eliminar", new { codigo_juego=item.codigo_juego })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

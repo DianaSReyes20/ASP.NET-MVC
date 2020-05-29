@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="asociacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Convenio">
+    <Key>
+      <PropertyRef Name="codigo_c" />
+    </Key>
+    <Property Name="codigo_c" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_patr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Patrocinador" Relationship="Self.FK__Convenio__nombre__2A4B4B5E" FromRole="Convenio" ToRole="Patrocinador" />
+    <NavigationProperty Name="Heroe" Relationship="Self.FK__Convenio__nombre__2B3F6F97" FromRole="Convenio" ToRole="Heroe" />
+  </EntityType>
+  <EntityType Name="Heroe">
+    <Key>
+      <PropertyRef Name="nombre_heroe" />
+    </Key>
+    <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rango" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="habilidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="celulas" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Convenio" Relationship="Self.FK__Convenio__nombre__2B3F6F97" FromRole="Heroe" ToRole="Convenio" />
+    <NavigationProperty Name="Lucha" Relationship="Self.FK__Lucha__nombre_he__34C8D9D1" FromRole="Heroe" ToRole="Lucha" />
+  </EntityType>
+  <EntityType Name="Lucha">
+    <Key>
+      <PropertyRef Name="codigo_l" />
+    </Key>
+    <Property Name="codigo_l" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_monstruo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_heroe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resultado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Heroe" Relationship="Self.FK__Lucha__nombre_he__34C8D9D1" FromRole="Lucha" ToRole="Heroe" />
+    <NavigationProperty Name="Monstruo" Relationship="Self.FK__Lucha__nombre_mo__33D4B598" FromRole="Lucha" ToRole="Monstruo" />
+  </EntityType>
+  <EntityType Name="Monstruo">
+    <Key>
+      <PropertyRef Name="nombre_monstruo" />
+    </Key>
+    <Property Name="nombre_monstruo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nivel_amenaza" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Lucha" Relationship="Self.FK__Lucha__nombre_mo__33D4B598" FromRole="Monstruo" ToRole="Lucha" />
+  </EntityType>
+  <EntityType Name="Patrocinador">
+    <Key>
+      <PropertyRef Name="nombre_patr" />
+    </Key>
+    <Property Name="nombre_patr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Convenio" Relationship="Self.FK__Convenio__nombre__2A4B4B5E" FromRole="Patrocinador" ToRole="Convenio" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Convenio__nombre__2A4B4B5E">
+    <End Role="Patrocinador" Type="Self.Patrocinador" Multiplicity="1" />
+    <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patrocinador">
+        <PropertyRef Name="nombre_patr" />
+      </Principal>
+      <Dependent Role="Convenio">
+        <PropertyRef Name="nombre_patr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Convenio__nombre__2B3F6F97">
+    <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+    <End Role="Convenio" Type="Self.Convenio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Heroe">
+        <PropertyRef Name="nombre_heroe" />
+      </Principal>
+      <Dependent Role="Convenio">
+        <PropertyRef Name="nombre_heroe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lucha__nombre_he__34C8D9D1">
+    <End Role="Heroe" Type="Self.Heroe" Multiplicity="1" />
+    <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Heroe">
+        <PropertyRef Name="nombre_heroe" />
+      </Principal>
+      <Dependent Role="Lucha">
+        <PropertyRef Name="nombre_heroe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lucha__nombre_mo__33D4B598">
+    <End Role="Monstruo" Type="Self.Monstruo" Multiplicity="1" />
+    <End Role="Lucha" Type="Self.Lucha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Monstruo">
+        <PropertyRef Name="nombre_monstruo" />
+      </Principal>
+      <Dependent Role="Lucha">
+        <PropertyRef Name="nombre_monstruo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelsDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Convenio" EntityType="Self.Convenio" />
+    <EntitySet Name="Heroe" EntityType="Self.Heroe" />
+    <EntitySet Name="Lucha" EntityType="Self.Lucha" />
+    <EntitySet Name="Monstruo" EntityType="Self.Monstruo" />
+    <EntitySet Name="Patrocinador" EntityType="Self.Patrocinador" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK__Convenio__nombre__2A4B4B5E" Association="Self.FK__Convenio__nombre__2A4B4B5E">
+      <End Role="Patrocinador" EntitySet="Patrocinador" />
+      <End Role="Convenio" EntitySet="Convenio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Convenio__nombre__2B3F6F97" Association="Self.FK__Convenio__nombre__2B3F6F97">
+      <End Role="Heroe" EntitySet="Heroe" />
+      <End Role="Convenio" EntitySet="Convenio" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lucha__nombre_he__34C8D9D1" Association="Self.FK__Lucha__nombre_he__34C8D9D1">
+      <End Role="Heroe" EntitySet="Heroe" />
+      <End Role="Lucha" EntitySet="Lucha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lucha__nombre_mo__33D4B598" Association="Self.FK__Lucha__nombre_mo__33D4B598">
+      <End Role="Monstruo" EntitySet="Monstruo" />
+      <End Role="Lucha" EntitySet="Lucha" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PAvanzada.Models.Convenio>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+    <div class="container">
+        <div class="mini_container">
+
+            <form class="form">
+                <span class="form_title">
+                    Lista de convenios
+                </span>
+
+                <p>
+                    @Html.ActionLink("Registrar nuevo convenio", "Convenio")
+                </p>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            <label>Codigo convenio</label>
+                        </th>
+                        <th>
+                            <label>Nombre patrocinador</label>
+                        </th>
+                        <th>
+                            <label>Nombre héroe</label>
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.codigo_c)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_patr)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_heroe)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

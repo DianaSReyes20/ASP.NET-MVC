@@ -1,0 +1,71 @@
+﻿@model PAvanzada.Models.Lucha
+
+@{
+    ViewBag.Title = "Lucha";
+}
+
+@using (Html.BeginForm("Lucha", "Lucha", FormMethod.Post))
+{
+    <div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+        <div class="container">
+            <div class="mini_container">
+                <div class="image" data-tilt>
+                    <img src="../../Content/Images/Luchas.png" alt="IMG">
+                </div>
+
+                <form class="form">
+                    <span class="form_title">
+                        Registrar combate
+                    </span>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.codigo_l, new { htmlAttributes = new { @class = "input100", @placeholder = "Codigo de lucha" } })
+                        @Html.ValidationMessageFor(model => model.codigo_l, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_monstruo, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre monstruo" } })
+                        @Html.ValidationMessageFor(model => model.nombre_monstruo, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_heroe, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre héroe" } })
+                        @Html.ValidationMessageFor(model => model.nombre_heroe, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.resultado, new { htmlAttributes = new { @class = "input100", @placeholder = "Resultado" } })
+                        @Html.ValidationMessageFor(model => model.resultado, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_ganador, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre Ganador" } })
+                        @Html.ValidationMessageFor(model => model.nombre_ganador, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="image">
+                        <button class="button">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+                <a href="../Lucha/List" class="atras">
+                    Regresar a la lista
+                    <img src="~/Content/Images/atras.png" width="20px" height="20px" alt="IMG">
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

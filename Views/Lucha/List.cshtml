@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PAvanzada.Models.Lucha>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+    <div class="container">
+        <div class="mini_container">
+
+            <form class="form">
+                <span class="form_title">
+                    Lista de combates
+                </span>
+
+                <p>
+                    @Html.ActionLink("Registrar nuevo combate", "Lucha")
+                </p>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            <label>Codigo lucha</label>
+                        </th>
+                        <th>
+                            <label>Nombre monstruo</label>
+                        </th>
+                        <th>
+                            <label>Nombre héroe</label>
+                        </th>
+                        <th>
+                            <label>Resultado</label>
+                        </th>
+                        <th>
+                            <label>Nombre del ganador</label>
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.codigo_l)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_monstruo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_heroe)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.resultado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre_ganador)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

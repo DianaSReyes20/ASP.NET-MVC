@@ -1,0 +1,50 @@
+﻿@model PAvanzada.Models.Juego_Favorito
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+    <div class="container">
+        <div class="mini_container">
+            <form class="form">
+                <h3>¿Estás seguro de que quieres borrar este juego?</h3>
+
+                <div>
+                    <h4>Juego</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.nombre_juego)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombre_juego)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.estrellas)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.estrellas)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="image">
+                            <button class="button">
+                                Eliminar
+                            </button>
+                        </div>
+                              @Html.ActionLink("Volver a la lista", "List")
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

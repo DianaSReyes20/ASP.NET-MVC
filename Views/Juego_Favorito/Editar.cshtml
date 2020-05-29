@@ -1,0 +1,41 @@
+﻿@model PAvanzada.Models.Juego_Favorito
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+        <div class="container">
+            <div class="mini_container">
+                <form class="form">
+                    <span class="form_title">
+                        Editar juego
+                    </span>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_juego, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre del juego" } })
+                        @Html.ValidationMessageFor(model => model.nombre_juego, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.estrellas, new { htmlAttributes = new { @class = "input100", @placeholder = "Estrellas" } })
+                        @Html.ValidationMessageFor(model => model.estrellas, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="image">
+                        <button class="button">
+                            Editar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}

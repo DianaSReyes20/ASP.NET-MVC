@@ -1,0 +1,53 @@
+﻿@model PAvanzada.Models.Juego_Favorito
+
+@{
+    ViewBag.Title = "Juego_Favorito";
+}
+
+@using (Html.BeginForm("Juego_Favorito", "Juego_Favorito", FormMethod.Post))
+{
+    <div class="background" style="background-image: url('../../Content/Images/Ciudad-Z.jpg');">
+        <div class="container">
+            <div class="mini_container">
+                <form class="form">
+                    <span class="form_title">
+                        Registrar juego
+                    </span>
+
+                    <div class="image" data-tilt>
+                        <img src="../../Content/Images/juegos.jpg" alt="IMG">
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.codigo_juego, new { htmlAttributes = new { @class = "input100", @placeholder = "Codigo" } })
+                        @Html.ValidationMessageFor(model => model.codigo_juego, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.nombre_juego, new { htmlAttributes = new { @class = "input100", @placeholder = "Nombre del juego" } })
+                        @Html.ValidationMessageFor(model => model.nombre_juego, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="input">
+                        @Html.EditorFor(model => model.estrellas, new { htmlAttributes = new { @class = "input100", @placeholder = "Estrellas" } })
+                        @Html.ValidationMessageFor(model => model.estrellas, "", new { @class = "text-danger" })
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="image">
+                        <button class="button">
+                            Registrar
+                        </button>
+                    </div>
+
+                </form>
+                <a href="../Juego_Favorito/List" class="atras">
+                    Regresar a la lista
+                    <img src="~/Content/Images/atras.png" width="20px" height="20px" alt="IMG">
+                </a>
+            </div>
+        </div>
+    </div>
+}
